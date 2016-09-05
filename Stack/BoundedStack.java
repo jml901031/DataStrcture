@@ -1,6 +1,5 @@
 package Stack;
 
-import javax.naming.SizeLimitExceededException;
 import java.util.EmptyStackException;
 
 /**
