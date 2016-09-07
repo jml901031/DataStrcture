@@ -14,7 +14,7 @@ public class HashedIndexHeap<T extends Comparable<T>> {
     private int capacity;
     private Comparator<T> cmp = null;
     private final static int INITIALIZE_SIZE = 10;
-    HashMap<T,Integer> indexRecorder = new HashMap<T, Integer>();
+    private HashMap<T,Integer> indexRecorder = new HashMap<T, Integer>();
     public HashedIndexHeap() {
         size = 0;
         array = (T[]) new Comparable[INITIALIZE_SIZE];
@@ -72,26 +72,26 @@ public class HashedIndexHeap<T extends Comparable<T>> {
     }
     private T[] expand(T []array)
     {
-        T[] expandArray =(T[]) new Comparable[array.length/2 + array.length];
+        T[] expandArray =(T[]) new Comparable[capacity/2 + capacity];
         for(int i = 0;i < array.length;i++)
         {
             expandArray[i] = array[i];
         }
         return expandArray;
     }
-    public T offer(T val)
+    public void offer(T val)
     {
-        if(size + 1 >= array.length)
+        if(size + 1 >= capacity)
         {
             array = expand(array);
             capacity = array.length;
         }
-        T top = array[0];
+
         array[size] = val;
         indexRecorder.put(val,size);
         shiftUp(size);
         size++;
-        return top;
+
     }
     private void shiftUp(int index)
     {
@@ -118,7 +118,7 @@ public class HashedIndexHeap<T extends Comparable<T>> {
         return true;
     }
     private int getParent(int child) {
-        return child / 2;
+        return (child-1) / 2;
     }
 
     private int getLeftChild(int parent) {

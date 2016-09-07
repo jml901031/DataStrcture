@@ -64,25 +64,24 @@ public class Heap<T extends Comparable<T>> {
     }
     private T[] expand(T []array)
     {
-        T[] expandArray =(T[]) new Comparable[array.length/2 + array.length];
+        T[] expandArray =(T[]) new Comparable[capacity/2 + capacity];
         for(int i = 0;i < array.length;i++)
         {
             expandArray[i] = array[i];
         }
         return expandArray;
     }
-    public T offer(T val)
+    public void offer(T val)
     {
-        if(size + 1 >= array.length)
+        if(size + 1 >= capacity)
         {
             array = expand(array);
             capacity = array.length;
         }
-        T top = array[0];
         array[size] = val;
         shiftUp(size);
         size++;
-        return top;
+
     }
     private void shiftUp(int index)
     {
