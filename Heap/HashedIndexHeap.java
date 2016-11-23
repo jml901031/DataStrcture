@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by jml90 on 9/6/2016.
  */
 //with o(logn) deletion;
 public class HashedIndexHeap<T extends Comparable<T>> {
@@ -20,6 +19,7 @@ public class HashedIndexHeap<T extends Comparable<T>> {
         array = (T[]) new Comparable[INITIALIZE_SIZE];
         capacity = INITIALIZE_SIZE;
     }
+    
     public HashedIndexHeap(Comparator<T> cmp)
     {
         size = 0;
@@ -28,6 +28,7 @@ public class HashedIndexHeap<T extends Comparable<T>> {
         this.cmp = cmp;
 
     }
+    
     public HashedIndexHeap(int capacity,Comparator<T> cmp)
     {
         array = (T[]) new Comparable[capacity];
@@ -35,6 +36,7 @@ public class HashedIndexHeap<T extends Comparable<T>> {
         this.cmp = cmp;
         this.size = 0;
     }
+    
     public HashedIndexHeap(List<T> list) {
         if (list == null) {
             throw new NullPointerException("Null Pointer Exception");
@@ -49,6 +51,7 @@ public class HashedIndexHeap<T extends Comparable<T>> {
         Heapify();
 
     }
+    
     public T peek()
     {
         if(size == 0)
@@ -57,6 +60,7 @@ public class HashedIndexHeap<T extends Comparable<T>> {
         }
         return array[0];
     }
+    
     public T poll()
     {
         if(size == 0)
@@ -70,6 +74,7 @@ public class HashedIndexHeap<T extends Comparable<T>> {
         shiftDown(0,size);
         return top;
     }
+    
     private T[] expand(T []array)
     {
         T[] expandArray =(T[]) new Comparable[capacity/2 + capacity];
@@ -79,6 +84,7 @@ public class HashedIndexHeap<T extends Comparable<T>> {
         }
         return expandArray;
     }
+    
     public void offer(T val)
     {
         if(size + 1 >= capacity)
@@ -93,6 +99,7 @@ public class HashedIndexHeap<T extends Comparable<T>> {
         size++;
 
     }
+    
     private void shiftUp(int index)
     {
         while(index != 0 && compare(array[getParent(index)],array[index]) > 0)
@@ -103,6 +110,7 @@ public class HashedIndexHeap<T extends Comparable<T>> {
             index =getParent(index);
         }
     }
+    
     public boolean remove(T val)
     {
         Integer index = indexRecorder.get(val);
@@ -117,6 +125,7 @@ public class HashedIndexHeap<T extends Comparable<T>> {
         shiftUp(index);
         return true;
     }
+    
     private int getParent(int child) {
         return (child-1) / 2;
     }
@@ -136,10 +145,12 @@ public class HashedIndexHeap<T extends Comparable<T>> {
             shiftDown(i,len);
         }
     }
+    
     public int size()
     {
         return size;
     }
+    
     private void shiftDown( int start, int size) {
         while (start < size) {
             int left = getLeftChild(start);
